@@ -46,6 +46,28 @@ for await (const part of response) {
 }
 ```
 
+## Pull and use a model
+
+To pull a model and then use it (similar to the CLI's `ollama run` command), you can combine `pull` and `chat` or `generate`:
+
+```javascript
+import ollama from 'ollama'
+
+const model = 'llama3.1'
+
+// Pull the model first
+await ollama.pull({ model })
+
+// Then use it for chat
+const response = await ollama.chat({
+  model,
+  messages: [{ role: 'user', content: 'Hello!' }],
+})
+console.log(response.message.content)
+```
+
+See the [pull-and-chat example](examples/pull-and-chat) for more details including progress updates during pull.
+
 ## API
 
 The Ollama JavaScript library's API is designed around the [Ollama REST API](https://github.com/jmorganca/ollama/blob/main/docs/api.md)
